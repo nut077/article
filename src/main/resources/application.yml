@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+  compression:
+    #ทำการ compress เมื่อ response มี size มากว่า 1 KB
+    enabled: true
+    min-response-size: 5KB
+
+  http2:
+    #บอก spring boot ให้ เปิด http2
+    enabled: true
+
+spring:
+  main:
+    lazy-initialization: true
+  datasource:
+    #url: jdbc:mysql://lottodb:3300/article?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3300/article?serverTimezone=Asia/Bangkok
+    username: freedom
+    password: ENC(2IEo4xQUPFGEhkobp/eXuA==)
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update #create-drop สร้าง schema ต่างๆที่เราได้ทำใน entity และจำ destroy schema เมื่อทำการปิด project #สร้าง schema แต่ไม่ destroy
+    properties:
+      hibernate.format_sql: false #ให้ format อยู่ในรูปที่อ่านง่ายขึ้น default = false
+      hibernate.generate_statistics: false #วิเคราะได้ว่า query นี้ทำการเปิด ปิด connect เท่าไร จำนวนเวลา
+      hibernate.query.immutable_entity_update_query_handling_mode: exception  #(warning | exception) default is warning
+
+    #for handle 404 exception
+  mvc:
+    throw-exception-if-no-handler-found: true
+    log-resolved-exception: false
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
