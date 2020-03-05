@@ -12,5 +12,6 @@ public interface BaseMapper<E, D> {
   List<D> mapToListDto(Collection<E> entity);
   @InheritInverseConfiguration
   E mapToEntity(D dto);
+  @InheritInverseConfiguration
   E mapToEntity(D dto, @MappingTarget E entity);
 }

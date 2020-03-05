@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -41,5 +42,10 @@ public class CommonAdvice extends ResponseEntityExceptionHandler {
   @ExceptionHandler(Exception.class)
   protected ResponseEntity<Object> handle(Exception ex) {
     return handle(ex, HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.value());
+  }
+
+  @ExceptionHandler(HttpClientErrorException.Unauthorized.class)
+  protected ResponseEntity<Object> handle(HttpClientErrorException.Unauthorized ex) {
+    return handle(ex, HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED.value());
   }
 }

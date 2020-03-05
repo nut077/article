@@ -1,9 +1,11 @@
 package com.github.nut077.article.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,4 +21,17 @@ public class Article extends Common {
 
   private String title;
   private String excerpt;
+
+  @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+  private List<Comment> comments;
+
+  @JsonIgnore
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  private User user;
+
+  public void setComments(List<Comment> comments) {
+    comments.forEach(comment -> comment.setArticle(this));
+    this.comments = comments;
+  }
 }
