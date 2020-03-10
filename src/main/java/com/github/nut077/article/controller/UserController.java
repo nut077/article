@@ -12,7 +12,7 @@ import java.util.List;
 @Log4j2
 @RestController
 @RequiredArgsConstructor
-public class UserController extends CommonController {
+public class UserController extends BaseController {
 
   private final UserService userService;
 
@@ -28,7 +28,7 @@ public class UserController extends CommonController {
   }
 
   @PostMapping("/users")
-  public ResponseEntity<UserDto> create(UserDto dto) {
+  public ResponseEntity<UserDto> create(@RequestBody UserDto dto) {
     return ResponseEntity.ok(userService.create(dto));
   }
 

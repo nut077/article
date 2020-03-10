@@ -15,7 +15,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @Log4j2
 @RestController
 @RequiredArgsConstructor
-public class ArticleController extends CommonController {
+public class ArticleController extends BaseController {
 
   private final ArticleService articleService;
   private final JsonUtil jsonUtil;
@@ -32,13 +32,13 @@ public class ArticleController extends CommonController {
   }
 
   @PostMapping("/articles")
-  public ResponseEntity<ArticleDto> create(ArticleDto dto) {
+  public ResponseEntity<ArticleDto> create(@RequestBody ArticleDto dto) {
     log.info("ArticleController::create -->> {}", jsonUtil.toJson(dto));
     return ResponseEntity.ok(articleService.create(dto));
   }
 
   @PutMapping("/articles/{id}")
-  public ResponseEntity<ArticleDto> update(@PathVariable Long id, ArticleDto dto) {
+  public ResponseEntity<ArticleDto> update(@PathVariable Long id, @RequestBody ArticleDto dto) {
     log.info("ArticleController::update id -->> [{}]", id);
     log.info("ArticleController::update req -->> {}", jsonUtil.toJson(dto));
     return ResponseEntity.ok(articleService.update(id, dto));

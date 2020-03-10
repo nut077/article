@@ -1,0 +1,1 @@
+Environment variables: jasypt.encryptor.password=secretkey

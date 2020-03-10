@@ -20,14 +20,10 @@ public class User extends Common {
 
   @NotNull
   @Column(unique = true)
-  private String email;
+  private String username;
 
   @NotNull
   private String password;
-
-  @NotNull
-  @Column(unique = true)
-  private String username;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Article> articles;

@@ -12,7 +12,7 @@ server:
 
 spring:
   main:
-    lazy-initialization: true
+    lazy-initialization: false
   datasource:
     #url: jdbc:mysql://lottodb:3300/article?serverTimezone=UTC
     url: jdbc:mysql://localhost:3300/article?serverTimezone=Asia/Bangkok
@@ -45,5 +45,6 @@ management:
       exposure:
         include: '*'
 
+#base64
 jwt:
-  secret: ENC(2IEo4xQUPFGEhkobp/eXuA==)
+  secret: ENC(P1XJW9uSBiRG7622F6hc8g==)
