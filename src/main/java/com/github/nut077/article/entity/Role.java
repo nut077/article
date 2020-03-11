@@ -20,7 +20,7 @@ public class Role {
   @ManyToMany
   @JoinTable(
     name = "users_roles",
-    joinColumns = @JoinColumn(name = "role_id"),
+    joinColumns = @JoinColumn(name = "roles_id"),
     inverseJoinColumns = @JoinColumn(name = "users_id")
   )
   private Set<User> users;
