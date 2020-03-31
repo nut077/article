@@ -41,7 +41,7 @@ public class User extends Common {
     this.comments = comments;
   }
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JsonIgnore
   @JoinTable(
     name = "users_roles",

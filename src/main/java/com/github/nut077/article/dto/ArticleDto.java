@@ -13,6 +13,6 @@ public class ArticleDto {
   private String title;
   private String content;
   private String excerpt;
-  private String authorId;
+  private Long authorId;
   private List<CommentDto> comments;
 }

@@ -31,7 +31,9 @@ public class Article extends Common {
   private User user;
 
   public void setComments(List<Comment> comments) {
-    comments.forEach(comment -> comment.setArticle(this));
+    if (comments != null) {
+      comments.forEach(comment -> comment.setArticle(this));
+    }
     this.comments = comments;
   }
 }

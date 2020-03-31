@@ -32,9 +32,9 @@ public class ArticleController extends BaseController {
   }
 
   @PostMapping("/articles")
-  public ResponseEntity<ArticleDto> create(@RequestBody ArticleDto dto) {
+  public ResponseEntity<ArticleDto> create(@RequestBody ArticleDto dto, @RequestHeader("authorization") String token) {
     log.info("ArticleController::create -->> {}", jsonUtil.toJson(dto));
-    return ResponseEntity.ok(articleService.create(dto));
+    return ResponseEntity.ok(articleService.create(dto, token));
   }
 
   @PutMapping("/articles/{id}")

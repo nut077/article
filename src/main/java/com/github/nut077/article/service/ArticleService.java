@@ -3,8 +3,10 @@ package com.github.nut077.article.service;
 import com.github.nut077.article.dto.ArticleDto;
 import com.github.nut077.article.dto.mapper.ArticleMapper;
 import com.github.nut077.article.entity.Article;
+import com.github.nut077.article.entity.User;
 import com.github.nut077.article.exception.NotFoundException;
 import com.github.nut077.article.repository.ArticleRepository;
+import com.github.nut077.article.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ public class ArticleService {
 
   private final ArticleRepository articleRepository;
   private final ArticleMapper mapper;
+  private final UserService userService;
+  private final JwtTokenUtil jwtTokenUtil;
 
   public List<ArticleDto> findAll() {
     return mapper.mapToListDto(articleRepository.findAll());
@@ -25,7 +29,10 @@ public class ArticleService {
     return mapper.mapToDto(getArticle(id));
   }
 
-  public ArticleDto create(ArticleDto dto) {
+  public ArticleDto create(ArticleDto dto, String token) {
+    String username = jwtTokenUtil.getUsernameFromToken(token.substring(7));
+    User user = userService.findByUsername(username);
+    dto.setAuthorId(user.getId());
     return mapper.mapToDto(articleRepository.save(mapper.mapToEntity(dto)));
   }
 
