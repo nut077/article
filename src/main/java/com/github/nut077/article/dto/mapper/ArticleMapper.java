@@ -17,6 +17,7 @@ public interface ArticleMapper extends BaseMapper<Article, ArticleDto> {
 
   @Mapping(target = "articleId", source = "article.id")
   @Mapping(target = "userId", source = "user.id")
+  @Mapping(target = "username", source = "user.username")
   CommentDto mapToCommentDto(Comment entity);
 
   @Mapping(target = "article.id", source = "articleId")
