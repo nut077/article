@@ -1,5 +1,6 @@
 package com.github.nut077.article.controller;
 
+import com.github.nut077.article.dto.ArticleCreateDto;
 import com.github.nut077.article.dto.ArticleDto;
 import com.github.nut077.article.service.ArticleService;
 import com.github.nut077.article.util.JsonUtil;
@@ -32,13 +33,13 @@ public class ArticleController extends BaseController {
   }
 
   @PostMapping("/articles")
-  public ResponseEntity<ArticleDto> create(@RequestBody ArticleDto dto, @RequestHeader("authorization") String token) {
+  public ResponseEntity<ArticleDto> create(@RequestBody ArticleCreateDto dto, @RequestHeader("authorization") String token) {
     log.info("ArticleController::create -->> {}", jsonUtil.toJson(dto));
     return ResponseEntity.ok(articleService.create(dto, token));
   }
 
   @PutMapping("/articles/{id}")
-  public ResponseEntity<ArticleDto> update(@PathVariable Long id, @RequestBody ArticleDto dto) {
+  public ResponseEntity<ArticleDto> update(@PathVariable Long id, @RequestBody ArticleCreateDto dto) {
     log.info("ArticleController::update id -->> [{}]", id);
     log.info("ArticleController::update req -->> {}", jsonUtil.toJson(dto));
     return ResponseEntity.ok(articleService.update(id, dto));
