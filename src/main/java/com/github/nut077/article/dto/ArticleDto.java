@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class ArticleDto {
 
-  private String id;
+  private Long id;
   private String title;
   private String content;
   private String excerpt;
